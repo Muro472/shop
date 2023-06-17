@@ -1,0 +1,18 @@
+.example-item {
+  max-width: 345px;
+  margin: 20px;
+}
+
+.container {
+  border-radius: 7px;
+
+  /* Set initial box shadow */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  /* Add transition property */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.container:hover {
+  /* Apply elevated box shadow on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
