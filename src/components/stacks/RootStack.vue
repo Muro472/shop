@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import usePageRoute from 'src/composition/usePageRoute';
 import { onMounted } from 'vue';
-
+import { RouterNames } from 'src/enums/router/RouterNames';
+import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const fixLink = () => {
-  const route = usePageRoute();
   router.beforeEach((to, from, next) => {
     if (!to.name) {
-      next(route.langLink({ lang: 'en' }));
+      next({ name: RouterNames.APP_HOME_VIEW, params: { lang: 'en' } });
     } else {
       next();
     }

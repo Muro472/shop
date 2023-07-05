@@ -19,6 +19,13 @@ const routes: RouteRecordRaw[] = [
           LanguageStack: () => import('src/pages/HomeView.vue'),
         },
       },
+      {
+        path: RouterPaths.APP_SHOP_VIEW,
+        name: RouterNames.APP_SHOP_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/ShopView.vue'),
+        },
+      },
     ],
   },
 ];

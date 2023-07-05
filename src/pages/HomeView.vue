@@ -1,5 +1,49 @@
 <script setup lang="ts">
 import HomeViewLayout from 'src/components/layouts/HomeViewLayout.vue';
+import { homeAssets } from 'src/utils/categories';
+import { reactive } from 'vue';
+// import { overritedRouterPush } from 'src/utils/RouterProxy';
+// import { RouterParams } from 'src/enums/router/RouterNames';
+
+//   vynil: Vynil,
+
+const state = reactive([
+  {
+    label: 'Audiotechnics',
+    photo: homeAssets.audiotechnics,
+  },
+  {
+    label: 'Books',
+    photo: homeAssets.books,
+  },
+  {
+    label: 'Cassets',
+    photo: homeAssets.cassets,
+  },
+  {
+    label: 'Cd',
+    photo: homeAssets.cd,
+  },
+  {
+    label: 'Games',
+    photo: homeAssets.games,
+  },
+  {
+    label: 'Plackats',
+    photo: homeAssets.plackats,
+  },
+  {
+    label: 'Suveneirs',
+    photo: homeAssets.suveneirs,
+  },
+  {
+    label: 'Vynil',
+    photo: homeAssets.vynil,
+  },
+]);
+// const goToShop = () => {
+//   console.log('da');
+// };
 </script>
 
 <template>
@@ -7,7 +51,7 @@ import HomeViewLayout from 'src/components/layouts/HomeViewLayout.vue';
     <template #head>
       <q-parallax>
         <template v-slot:media>
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+          <img :src="homeAssets.mainImage" />
         </template>
 
         <template v-slot:content="scope">
@@ -30,20 +74,22 @@ import HomeViewLayout from 'src/components/layouts/HomeViewLayout.vue';
     <template #main>
       <div class="row justify-center q-gutter-sm">
         <q-intersection
-          v-for="index in 6"
+          v-for="(item, index) in state"
           :key="index"
           once
           transition="slide-up"
           class="example-item"
         >
-          <q-card flat bordered class="container">
-            <img src="https://cdn.quasar.dev/img/mountains.jpg" />
-
-            <q-card-section>
-              <div class="text-h6">Card #{{ index }}</div>
-              <div class="text-subtitle2">by John Doe</div>
-            </q-card-section>
-          </q-card>
+          <div class="main_item">
+            <q-card flat class="main_item-container">
+              <q-img
+                fit="cover"
+                class="main_item-container-img"
+                :src="item.photo"
+              />
+            </q-card>
+            <div class="main_item-text">{{ item.label }}</div>
+          </div>
         </q-intersection>
       </div>
     </template>
