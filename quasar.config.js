@@ -61,7 +61,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: 'https://muro472.github.io/shop/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
