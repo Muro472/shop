@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <q-intersection once transition="fade">
     <div class="mainLayout">

@@ -1,32 +1,34 @@
-import Audiotechnics from 'assets/home_page/Audiotechnics.jpeg';
+import Player from 'assets/home_page/Audiotechnics.jpeg';
 import Books from 'assets/home_page/Books.jpeg';
-import Cassets from 'assets/home_page/Cassets.png';
+import Cassette from 'assets/home_page/Cassets.png';
 import Cd from 'assets/home_page/Cd.webp';
-import Games from 'assets/home_page/Games.jpeg';
+import Game from 'assets/home_page/Games.jpeg';
 import MainImage from 'assets/home_page/MainImage.jpeg';
-import Plackats from 'assets/home_page/Plackats.jpg';
-import Suveneirs from 'assets/home_page/Suveneirs.webp';
-import Vynil from 'assets/home_page/Vynil.png';
+import Poster from 'assets/home_page/Plackats.jpg';
+import Souvenir from 'assets/home_page/Suveneirs.webp';
+import Vinyl from 'assets/home_page/Vynil.png';
 
 export const homeAssets = {
-  audiotechnics: Audiotechnics,
+  player: Player,
   books: Books,
-  cassets: Cassets,
+  cassette: Cassette,
   cd: Cd,
-  games: Games,
+  game: Game,
   mainImage: MainImage,
-  plackats: Plackats,
-  suveneirs: Suveneirs,
-  vynil: Vynil,
+  poster: Poster,
+  souvenir: Souvenir,
+  vinyl: Vinyl,
 } as const;
 
 export const categories = [
-  'vinyl',
-  'cd',
-  'cssette',
   'player',
+  'books',
+  'cassette',
+  'cd',
+  'game',
   'poster',
   'souvenir',
+  'vinyl',
 ] as const;
 
 export type CategoryType = (typeof categories)[number];

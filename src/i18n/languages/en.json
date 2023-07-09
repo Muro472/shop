@@ -1,4 +1,13 @@
 {
-  "title": "назва магаза",
-  "homePageText1": "якийсьто піздатий текст"
+  "title": "Hudba",
+  "homePageText1": "In Music Veritas",
+  "buyInOneClick": "Buy in one click",
+  "player": "Player",
+  "books": "Books",
+  "cassettes": "Cassettes",
+  "cd": "CD",
+  "games": "Games",
+  "poster": "Poster",
+  "souvenir": "Souvenir",
+  "vinyl": "Vinyl"
 }

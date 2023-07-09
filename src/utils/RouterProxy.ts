@@ -1,13 +1,13 @@
-import { useRouter } from 'vue-router';
+import { useRouter, RouteLocationRaw } from 'vue-router';
 import { RouterParams } from 'src/enums/router/RouterNames';
 const router = useRouter();
 
-export const overritedRouterPush = <T extends keyof RouterParams>(
+export const overwriteRouterPush = <T extends keyof RouterParams>(
   name: T,
   params: RouterParams[T]
-): void => {
-  router.push({
+): RouteLocationRaw => {
+  return {
     name,
     params: params as never,
-  });
+  } as RouteLocationRaw;
 };

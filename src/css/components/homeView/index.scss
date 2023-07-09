@@ -5,11 +5,11 @@
 .main_item {
   cursor: pointer;
   &-text {
+    color: #111;
     width: 100%;
+    text-align: center;
     font-weight: 400;
     font-size: 18px;
-    color: #111;
-    text-align: center;
     font-family: Volkhov, 'Times New Roman', sans-serif;
     font-style: italic;
   }

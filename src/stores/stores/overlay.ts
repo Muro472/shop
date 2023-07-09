@@ -9,10 +9,10 @@ export const useOverlayStore = defineStore('overlay', {
   },
   actions: {
     startOverlay() {
-      this.overlay === true;
+      this.overlay = true;
     },
     stopOverlay() {
-      this.overlay === false;
+      this.overlay = false;
     },
   },
 });

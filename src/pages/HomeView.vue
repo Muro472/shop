@@ -2,48 +2,53 @@
 import HomeViewLayout from 'src/components/layouts/HomeViewLayout.vue';
 import { homeAssets } from 'src/utils/categories';
 import { reactive } from 'vue';
-// import { overritedRouterPush } from 'src/utils/RouterProxy';
-// import { RouterParams } from 'src/enums/router/RouterNames';
+import { overwriteRouterPush } from 'src/utils/RouterProxy';
+import { RouterNames } from 'src/enums/router/RouterNames';
+import { categories, CategoryType } from 'src/utils/categories';
+import { useRouter } from 'vue-router';
+import { useOverlayStore } from 'src/stores/stores/overlay';
 
-//   vynil: Vynil,
-
+const overlayStore = useOverlayStore();
+const router = useRouter();
 const state = reactive([
   {
-    label: 'Audiotechnics',
-    photo: homeAssets.audiotechnics,
+    label: categories[0],
+    photo: homeAssets.player,
   },
   {
-    label: 'Books',
+    label: categories[1],
     photo: homeAssets.books,
   },
   {
-    label: 'Cassets',
-    photo: homeAssets.cassets,
+    label: categories[2],
+    photo: homeAssets.cassette,
   },
   {
-    label: 'Cd',
+    label: categories[3],
     photo: homeAssets.cd,
   },
   {
-    label: 'Games',
-    photo: homeAssets.games,
+    label: categories[4],
+    photo: homeAssets.game,
   },
   {
-    label: 'Plackats',
-    photo: homeAssets.plackats,
+    label: categories[5],
+    photo: homeAssets.poster,
   },
   {
-    label: 'Suveneirs',
-    photo: homeAssets.suveneirs,
+    label: categories[6],
+    photo: homeAssets.souvenir,
   },
   {
-    label: 'Vynil',
-    photo: homeAssets.vynil,
+    label: categories[7],
+    photo: homeAssets.vinyl,
   },
 ]);
-// const goToShop = () => {
-//   console.log('da');
-// };
+
+const goToShop = (item: CategoryType) => {
+  overlayStore.startOverlay();
+  router.push(overwriteRouterPush(RouterNames.APP_SHOP_VIEW, { type: item }));
+};
 </script>
 
 <template>
@@ -79,6 +84,7 @@ const state = reactive([
           once
           transition="slide-up"
           class="example-item"
+          @click="goToShop(item.label)"
         >
           <div class="main_item">
             <q-card flat class="main_item-container">
@@ -88,7 +94,7 @@ const state = reactive([
                 :src="item.photo"
               />
             </q-card>
-            <div class="main_item-text">{{ item.label }}</div>
+            <div class="main_item-text">{{ $t(item.label) }}</div>
           </div>
         </q-intersection>
       </div>

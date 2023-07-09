@@ -26,12 +26,18 @@ onMounted(() => {
         <q-toolbar>
           <q-toolbar-title>
             <q-avatar>
-              <img
+              <!-- <img
                 src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
-              />
+              /> -->
             </q-avatar>
-            Title
+            {{ $t('title') }}
           </q-toolbar-title>
+
+          <div class="cart">
+            <q-avatar>
+              <q-icon name="shopping_cart" size="sm" />
+            </q-avatar>
+          </div>
         </q-toolbar>
       </q-header>
 
@@ -43,5 +49,5 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-@import 'src/css/RootStack.scss';
+@import 'src/css/components/header.scss';
 </style>

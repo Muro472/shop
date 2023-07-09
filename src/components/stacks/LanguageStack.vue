@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useOverlayStore } from 'src/stores/stores/overlay';
-import { reactive, watch } from 'vue';
+import { reactive, watchEffect } from 'vue';
 import MainLoaderComponent from 'src/components/general/MainLoaderComponent.vue';
 const overlayStore = useOverlayStore();
 
@@ -8,12 +8,9 @@ const state = reactive({
   dialog: false,
 });
 
-watch(
-  () => overlayStore.getOverlay,
-  (val) => {
-    state.dialog = val;
-  }
-);
+watchEffect(() => {
+  state.dialog = overlayStore.getOverlay;
+});
 </script>
 
 <template>
@@ -27,7 +24,5 @@ watch(
     <MainLoaderComponent />
   </q-dialog>
 
-  <router-view name="LanguageStack" />
+  <router-view style="height: 100%" name="LanguageStack" />
 </template>
-
-<style scoped lang="scss"></style>
