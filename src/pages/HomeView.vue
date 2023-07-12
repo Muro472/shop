@@ -12,6 +12,10 @@ const overlayStore = useOverlayStore();
 const router = useRouter();
 const state = reactive([
   {
+    label: categories[7],
+    photo: homeAssets.vinyl,
+  },
+  {
     label: categories[0],
     photo: homeAssets.player,
   },
@@ -38,10 +42,6 @@ const state = reactive([
   {
     label: categories[6],
     photo: homeAssets.souvenir,
-  },
-  {
-    label: categories[7],
-    photo: homeAssets.vinyl,
   },
 ]);
 

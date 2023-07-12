@@ -7,6 +7,9 @@
       <div class="mainLayout-main">
         <slot name="main"></slot>
       </div>
+      <div class="mainLayout-footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
   </q-intersection>
 </template>

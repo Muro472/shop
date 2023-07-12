@@ -4,4 +4,6 @@ export enum RouterPaths {
   APP_HOME_VIEW = 'home',
 
   APP_SHOP_VIEW = 'shop/:type',
+
+  APP_ITEM_VIEW = 'item/:id',
 }

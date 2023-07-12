@@ -26,6 +26,13 @@ const routes: RouteRecordRaw[] = [
           LanguageStack: () => import('src/pages/ShopView.vue'),
         },
       },
+      {
+        path: RouterPaths.APP_ITEM_VIEW,
+        name: RouterNames.APP_ITEM_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/ItemPageView.vue'),
+        },
+      },
     ],
   },
 ];

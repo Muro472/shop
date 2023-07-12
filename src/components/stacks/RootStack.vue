@@ -43,6 +43,13 @@ onMounted(() => {
 
       <q-page-container>
         <router-view name="RootStack" />
+
+        <!-- <div class="footer">
+          da
+          <div class="footer-sociables">
+            <q-icon name="mdi-instagram" size="sm"></q-icon>
+          </div>
+        </div> -->
       </q-page-container>
     </q-layout>
   </q-card>
@@ -50,4 +57,5 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @import 'src/css/components/header.scss';
+@import 'src/css/components/footer.scss';
 </style>

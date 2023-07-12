@@ -1,7 +1,7 @@
 import { AppApiService } from 'src/api/AppApiService';
 
 import { GetProductsRequestType } from 'src/types/requests';
-import { GetProductsResponseType } from 'src/types/responses';
+import { GetProductsResponseType, IProductFromList } from 'src/types/responses';
 
 class ApiService extends AppApiService {
   async getProducts(
@@ -16,10 +16,20 @@ class ApiService extends AppApiService {
 
   async getProductById(
     id: string
+  ): Promise<[null, IProductFromList] | [unknown]> {
+    return this.axiosCall<IProductFromList>({
+      method: 'get',
+      url: `/products/find/${id}`,
+    });
+  }
+
+  async getCartItems(
+    ids: string[]
   ): Promise<[null, GetProductsResponseType] | [unknown]> {
     return this.axiosCall<GetProductsResponseType>({
       method: 'get',
-      url: `/products/${id}`,
+      url: '/products/cart',
+      params: ids.join(','),
     });
   }
 }

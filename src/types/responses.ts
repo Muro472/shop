@@ -11,4 +11,9 @@ export interface IProductFromList {
   _id: string;
 }
 
-export type GetProductsResponseType = IProductFromList[];
+export interface GetProductsResponseType {
+  currentPage: number;
+  products: IProductFromList[];
+  totalCount: number;
+  totalPages: number;
+}
