@@ -1,7 +1,8 @@
 {
-  "title": "Hudba",
+  "title": "FunMusic",
   "homePageText1": "In Music Veritas",
   "buyInOneClick": "Buy in one click",
+  "orderNow": "Order now",
   "player": "Player",
   "books": "Books",
   "cassettes": "Cassettes",
@@ -9,5 +10,6 @@
   "games": "Games",
   "poster": "Poster",
   "souvenir": "Souvenir",
-  "vinyl": "Vinyl"
+  "vinyl": "Vinyl",
+  "basket": "Kosár"
 }

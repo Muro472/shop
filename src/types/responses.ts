@@ -17,3 +17,5 @@ export interface GetProductsResponseType {
   totalCount: number;
   totalPages: number;
 }
+
+export type GetCartItems = IProductFromList[];

@@ -6,7 +6,9 @@ import { overwriteRouterPush } from 'src/utils/RouterProxy';
 import { RouterNames } from 'src/enums/router/RouterNames';
 import { useRouter } from 'vue-router';
 import { useOverlayStore } from 'src/stores/stores/overlay';
+import { useCartStore } from 'src/stores/stores/cart';
 
+const cartStore = useCartStore();
 const overlayStore = useOverlayStore();
 const router = useRouter();
 const state = reactive({
@@ -43,13 +45,15 @@ const itemClick = (id: string) => {
 };
 
 const putToCardClick = (item: IProductFromList) => {
-  console.log('da');
+  cartStore.addItem(item);
 };
 
 const orderClick = (item: IProductFromList) => {
   console.log('da');
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const onLoad = async (index, done) => {
   if (state.page < state.totalPages) {
     state.page++;
@@ -92,10 +96,14 @@ onMounted(() => firstStart());
                 {{ $t('buyInOneClick') }}
               </div>
               <div
+                v-if="!cartStore.getItems.some((x) => x._id === item._id)"
                 class="main-item-main-buttons-small"
                 @click="putToCardClick(item)"
               >
                 <q-icon name="shopping_cart" size="sm" />
+              </div>
+              <div v-else class="main-item-main-buttons-small">
+                <q-icon name="done" size="sm" />
               </div>
             </div>
           </div>
