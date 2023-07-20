@@ -19,6 +19,7 @@ const router = useRouter();
 
 const state = reactive({
   dialog: false,
+  termsOfUseDialog: false,
 });
 
 const fixLink = () => {
@@ -72,6 +73,12 @@ onMounted(() => {
               :src="Player"
             />
           </q-toolbar-title>
+
+          <div class="cart" @click="state.termsOfUseDialog = true">
+            <q-avatar>
+              <q-icon name="gavel" size="sm" />
+            </q-avatar>
+          </div>
 
           <div class="cart" @click="state.dialog = true">
             <q-avatar>
@@ -145,6 +152,23 @@ onMounted(() => {
       />
     </div>
   </div>
+
+  <q-dialog v-model="state.termsOfUseDialog">
+    <q-card>
+      <q-card-section>
+        <div class="text-h5">{{ $t('termsOfUseDialog') }}</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        <div>{{ $t('termsOfUseOne') }}</div>
+        <div>{{ $t('termsOfUseTwo') }}</div>
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="OK" color="primary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <style scoped lang="scss">

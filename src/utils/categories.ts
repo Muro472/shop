@@ -21,14 +21,16 @@ export const homeAssets = {
 } as const;
 
 export const categories = [
-  'Audiotechnic',
-  'Books',
-  'Cassette',
-  'Cd',
-  'Table games',
-  'Posters',
-  'Souvenirs',
-  'Vinyl',
+
+  'audiotechnic',
+  'books',
+  'cassette',
+  'cd',
+  'tableGames',
+  'posters',
+  'souvenirs',
+  'vinyl',
+
 ] as const;
 
 export type CategoryType = (typeof categories)[number];
