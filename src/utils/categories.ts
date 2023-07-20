@@ -21,6 +21,7 @@ export const homeAssets = {
 } as const;
 
 export const categories = [
+
   'audiotechnic',
   'books',
   'cassette',
@@ -29,6 +30,7 @@ export const categories = [
   'posters',
   'souvenirs',
   'vinyl',
+
 ] as const;
 
 export type CategoryType = (typeof categories)[number];
