@@ -1,12 +1,12 @@
-import Player from 'assets/home_page/Audiotechnics.jpeg';
-import Books from 'assets/home_page/Books.jpeg';
-import Cassette from 'assets/home_page/Cassets.png';
-import Cd from 'assets/home_page/Cd.webp';
-import Game from 'assets/home_page/Games.jpeg';
+import Player from 'assets/home_page/Audiotechnics.jpg';
+import Books from 'assets/home_page/Books.jpg';
+import Cassette from 'assets/home_page/Cassets.jpg';
+import Cd from 'assets/home_page/Cd.jpg';
+import Game from 'assets/home_page/Games.jpg';
 import MainImage from 'assets/home_page/MainImage.jpeg';
 import Poster from 'assets/home_page/Plackats.jpg';
 import Souvenir from 'assets/home_page/Suveneirs.webp';
-import Vinyl from 'assets/home_page/Vynil.png';
+import Vinyl from 'assets/home_page/Vynil.jpg';
 
 export const homeAssets = {
   player: Player,
@@ -21,13 +21,13 @@ export const homeAssets = {
 } as const;
 
 export const categories = [
-  'player',
+  'audiotechnic',
   'books',
   'cassette',
   'cd',
-  'game',
-  'poster',
-  'souvenir',
+  'tableGames',
+  'posters',
+  'souvenirs',
   'vinyl',
 ] as const;
 

@@ -3,13 +3,18 @@
   "homePageText1": "In Music Veritas",
   "buyInOneClick": "Buy in one click",
   "orderNow": "Order now",
+
+  "audiotechnic": "Audiotechnic",
   "player": "Player",
   "books": "Books",
-  "cassettes": "Cassettes",
+  "cassette": "Cassette",
   "cd": "CD",
-  "games": "Games",
-  "poster": "Poster",
-  "souvenir": "Souvenir",
+  "tableGames": "Table games",
+  "posters": "Posters",
+  "souvenirs": "Souvenirs",
   "vinyl": "Vinyl",
-  "basket": "Kosár"
+  "basket": "Kosár",
+  "termsOfUseDialog": "Használati feltételek",
+  "termsOfUseOne": "- Všetke ceny sú uvedené z DPH, bez poštovného poplatku.",
+  "termsOfUseTwo": "- Produkcia bude odoslaná najneskôr po 48 hodín od času objednávky"
 }
