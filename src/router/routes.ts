@@ -33,6 +33,40 @@ const routes: RouteRecordRaw[] = [
           LanguageStack: () => import('src/pages/ItemPageView.vue'),
         },
       },
+      {
+        path: RouterPaths.APP_ORDER_VIEW,
+        name: RouterNames.APP_ORDER_VIEW,
+        redirect: { name: RouterNames.APP_ORDER_PERSONAL_DATA_VIEW },
+        components: {
+          LanguageStack: () => import('src/components/stacks/OrderStack.vue'),
+        },
+        children: [
+          {
+            path: RouterPaths.APP_ORDER_PERSONAL_DATA_VIEW,
+            name: RouterNames.APP_ORDER_PERSONAL_DATA_VIEW,
+            components: {
+              OrderStack: () =>
+                import('src/pages/OrderStack/PersonalDataView.vue'),
+            },
+          },
+          {
+            path: RouterPaths.APP_ORDER_INFORMATION_VIEW,
+            name: RouterNames.APP_ORDER_INFORMATION_VIEW,
+            components: {
+              OrderStack: () =>
+                import('src/pages/OrderStack/OrderInformationView.vue'),
+            },
+          },
+          {
+            path: RouterPaths.APP_ORDER_PAYMENT_INFORMATION_VIEW,
+            name: RouterNames.APP_ORDER_PAYMENT_INFORMATION_VIEW,
+            components: {
+              OrderStack: () =>
+                import('src/pages/OrderStack/PaymentInformationView.vue'),
+            },
+          },
+        ],
+      },
     ],
   },
 ];

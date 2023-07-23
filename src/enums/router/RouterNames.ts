@@ -8,11 +8,23 @@ export enum RouterNames {
   APP_SHOP_VIEW = 'APP_SHOP_VIEW',
 
   APP_ITEM_VIEW = 'APP_ITEM_VIEW',
+
+  APP_ORDER_VIEW = 'APP_ORDER_VIEW',
+
+  APP_ORDER_PERSONAL_DATA_VIEW = 'APP_ORDER_PERSONAL_DATA_VIEW',
+
+  APP_ORDER_INFORMATION_VIEW = 'APP_ORDER_INFORMATION_VIEW',
+
+  APP_ORDER_PAYMENT_INFORMATION_VIEW = 'APP_ORDER_PAYMENT_INFORMATION_VIEW',
 }
 
 export interface RouterParams {
   [RouterNames.APP_HOME_VIEW]: { lang: string };
-  [RouterNames.APP_ROOT_PATH]: void;
+  [RouterNames.APP_ROOT_PATH]: never;
   [RouterNames.APP_SHOP_VIEW]: { type: CategoryType };
   [RouterNames.APP_ITEM_VIEW]: { id: string };
+  [RouterNames.APP_ORDER_VIEW]: never;
+  [RouterNames.APP_ORDER_PERSONAL_DATA_VIEW]: never;
+  [RouterNames.APP_ORDER_INFORMATION_VIEW]: never;
+  [RouterNames.APP_ORDER_PAYMENT_INFORMATION_VIEW]: never;
 }

@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { api } from 'src/api';
-import { onMounted, reactive, ref, watch } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { IProductFromList } from 'src/types/responses';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 import { useCartStore } from 'src/stores/stores/cart';
+import { useOrderStore } from 'src/stores/stores/order';
 
+const orderStore = useOrderStore();
 const cartStore = useCartStore();
 const overlayStore = useOverlayStore();
+
 const state = reactive({
   item: null as null | IProductFromList,
   itemIncluded: false,
@@ -38,6 +41,10 @@ const addToCart = () => {
   state.itemIncluded = true;
 };
 
+const buyInOneClick = () => {
+  if (state.item) orderStore.startOrder([state.item]);
+};
+
 onMounted(getData);
 </script>
 
@@ -57,7 +64,10 @@ onMounted(getData);
         </div>
         <div class="text-h5 littleMargin">{{ state.item.price }} €</div>
         <div class="main-container-data-buttons littleMargin">
-          <div class="main-container-data-buttons-big text-h6">
+          <div
+            class="main-container-data-buttons-big text-h6"
+            @click="buyInOneClick"
+          >
             {{ $t('buyInOneClick') }}
           </div>
           <div class="main-container-data-buttons-small">

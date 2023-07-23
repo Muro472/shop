@@ -6,4 +6,12 @@ export enum RouterPaths {
   APP_SHOP_VIEW = 'shop/:type',
 
   APP_ITEM_VIEW = 'item/:id',
+
+  APP_ORDER_VIEW = 'order',
+
+  APP_ORDER_PERSONAL_DATA_VIEW = 'personal-data',
+
+  APP_ORDER_INFORMATION_VIEW = 'order-information',
+
+  APP_ORDER_PAYMENT_INFORMATION_VIEW = 'payment-information',
 }

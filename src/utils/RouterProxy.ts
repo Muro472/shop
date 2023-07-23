@@ -4,7 +4,7 @@ const router = useRouter();
 
 export const overwriteRouterPush = <T extends keyof RouterParams>(
   name: T,
-  params: RouterParams[T]
+  params?: RouterParams[T]
 ): RouteLocationRaw => {
   return {
     name,
