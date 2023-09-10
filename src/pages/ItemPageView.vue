@@ -41,6 +41,11 @@ const addToCart = () => {
   state.itemIncluded = true;
 };
 
+const removeItem = () => {
+  cartStore.removeItem(state.item as IProductFromList);
+  state.itemIncluded = false;
+};
+
 const buyInOneClick = () => {
   if (state.item) orderStore.startOrder([state.item]);
 };
@@ -77,7 +82,7 @@ onMounted(getData);
               size="md"
               @click="addToCart"
             />
-            <q-icon v-else name="done" size="md" />
+            <q-icon v-else @click="removeItem" name="done" size="md" />
           </div>
         </div>
       </div>

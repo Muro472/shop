@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { RouterNames } from 'src/enums/router/RouterNames';
 import { useRouter } from 'vue-router';
 import Player from 'src/assets/logo.png';
@@ -12,6 +12,8 @@ import { overwriteRouterPush } from 'src/utils/RouterProxy';
 import facebook from 'src/assets/facebok.png';
 import instagram from 'src/assets/instagram.png';
 import mail from 'src/assets/mail.png';
+import { cards } from 'src/utils/cards';
+import { CategoryType } from 'src/utils/categories';
 
 const overlayStore = useOverlayStore();
 const cartStore = useCartStore();
@@ -20,10 +22,13 @@ const router = useRouter();
 const state = reactive({
   dialog: false,
   termsOfUseDialog: false,
+  showTabs: false,
+  selectedRouteTabValue: '',
 });
 
 const fixLink = () => {
   router.beforeEach((to, from, next) => {
+    // making shure that link has a lang param
     if (!to.name) {
       next({ name: RouterNames.APP_HOME_VIEW, params: { lang: 'en' } });
     } else {
@@ -31,6 +36,32 @@ const fixLink = () => {
     }
   });
 };
+
+const checkTabs = (val?: string) => {
+  const currentRoute = val ? val : router.currentRoute.value.name;
+
+  state.showTabs = ((): boolean => {
+    switch (currentRoute) {
+      case RouterNames.APP_ITEM_VIEW:
+      case RouterNames.APP_SHOP_VIEW:
+        state.selectedRouteTabValue = String(
+          router.currentRoute.value.params.type
+        );
+        return true;
+
+      default:
+        state.selectedRouteTabValue = '';
+        return false;
+    }
+  })();
+};
+
+watch(
+  () => router.currentRoute.value.name,
+  (val) => {
+    checkTabs(String(val));
+  }
+);
 
 // TODO: rewrite to select specific lang :)
 const navigateToHome = () => {
@@ -55,9 +86,15 @@ const getData = async () => {
   overlayStore.stopOverlay();
 };
 
+const goToShop = (item: CategoryType) => {
+  overlayStore.startOverlay();
+  router.push(overwriteRouterPush(RouterNames.APP_SHOP_VIEW, { type: item }));
+};
+
 onMounted(() => {
   fixLink();
   getData();
+  checkTabs();
 });
 </script>
 
@@ -86,17 +123,23 @@ onMounted(() => {
             </q-avatar>
           </div>
         </q-toolbar>
+        <q-tabs
+          v-if="state.showTabs"
+          v-model="state.selectedRouteTabValue"
+          align="left"
+        >
+          <q-tab
+            v-for="card in cards"
+            :name="card.label"
+            :key="card.label"
+            @click="goToShop(card.label)"
+            :label="card.label"
+          />
+        </q-tabs>
       </q-header>
 
       <q-page-container v-show="!overlayStore.getOverlay">
         <router-view name="RootStack" />
-
-        <!-- <div class="footer">
-          da
-          <div class="footer-sociables">
-            <q-icon name="mdi-instagram" size="sm"></q-icon>
-          </div>
-        </div> -->
       </q-page-container>
     </q-layout>
   </q-card>
@@ -131,9 +174,9 @@ onMounted(() => {
 
   <div class="footer">
     <div>
-      <span class="font-white"
-        >Ⓒ Fun Music {{ new Date().getUTCFullYear() }}</span
-      >
+      <span class="font-white">
+        Ⓒ Fun Music {{ new Date().getUTCFullYear() }}
+      </span>
     </div>
     <div class="footer__img-container">
       <div class="footer__contact-us-section font-white">

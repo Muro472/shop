@@ -1,9 +1,9 @@
 export type OrderStep =
-  | 'personalData'
+  | 'customerInformation'
   | 'orderInformation'
   | 'paymentInformation';
 
-export interface IPersonalData {
+export interface ICustomerInformation {
   name: string;
   surname: string;
   email: string;

@@ -1,17 +1,24 @@
 import { IProductFromList } from 'src/types/responses';
+
 import { defineStore, createPinia } from 'pinia';
+
 import router from 'src/router';
+
 import { overwriteRouterPush } from 'src/utils/RouterProxy';
+
+import { CounterForItemsType } from 'src/types/counterForItemsType';
+
 import {
-  IPersonalData,
+  ICustomerInformation,
   IOrderInformation,
   IPaymentInformation,
 } from 'src/types/orderTypes';
+
 import { RouterNames } from 'src/enums/router/RouterNames';
 
 export const useOrderStore = defineStore('order', {
   state: () => ({
-    personalData: null as IPersonalData | null,
+    customerInformation: null as ICustomerInformation | null,
     orderInformation: null as IOrderInformation | null,
     paymentInformation: null as IPaymentInformation | null,
     items: [] as IProductFromList[],
@@ -25,8 +32,8 @@ export const useOrderStore = defineStore('order', {
   },
 
   actions: {
-    setPersonalData(data: IPersonalData) {
-      this.personalData = data;
+    setCustomerInformation(data: ICustomerInformation) {
+      this.customerInformation = data;
     },
 
     setOrderInformation(data: IOrderInformation) {
@@ -38,6 +45,7 @@ export const useOrderStore = defineStore('order', {
     },
 
     async initOrderList() {
+      // when order page is reloaded
       const routerInstance = await router({ store: createPinia() });
 
       const localItemIds = localStorage.getItem('orderListIds');
@@ -50,7 +58,6 @@ export const useOrderStore = defineStore('order', {
       routerInstance.push(overwriteRouterPush(RouterNames.APP_ORDER_VIEW));
 
       this.itemIds = JSON.parse(localItemIds) as string[];
-      console.log(localItemIds);
     },
 
     async startOrder(items: IProductFromList[]) {
@@ -70,7 +77,7 @@ export const useOrderStore = defineStore('order', {
 
     async finishOrder() {
       this.orderCreated = false;
-      this.personalData = null;
+      this.customerInformation = null;
       this.orderInformation = null;
       this.paymentInformation = null;
       this.items = [];

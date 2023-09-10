@@ -1,49 +1,14 @@
 <script setup lang="ts">
 import HomeViewLayout from 'src/components/layouts/HomeViewLayout.vue';
-import { homeAssets } from 'src/utils/categories';
-import { reactive } from 'vue';
 import { overwriteRouterPush } from 'src/utils/RouterProxy';
 import { RouterNames } from 'src/enums/router/RouterNames';
-import { categories, CategoryType } from 'src/utils/categories';
+import { CategoryType } from 'src/utils/categories';
 import { useRouter } from 'vue-router';
 import { useOverlayStore } from 'src/stores/stores/overlay';
-
+import { homeAssets } from 'src/utils/categories';
+import { cards } from 'src/utils/cards';
 const overlayStore = useOverlayStore();
 const router = useRouter();
-const state = reactive([
-  {
-    label: categories[7],
-    photo: homeAssets.vinyl,
-  },
-  {
-    label: categories[0],
-    photo: homeAssets.player,
-  },
-  {
-    label: categories[1],
-    photo: homeAssets.books,
-  },
-  {
-    label: categories[2],
-    photo: homeAssets.cassette,
-  },
-  {
-    label: categories[3],
-    photo: homeAssets.cd,
-  },
-  {
-    label: categories[4],
-    photo: homeAssets.game,
-  },
-  {
-    label: categories[5],
-    photo: homeAssets.poster,
-  },
-  {
-    label: categories[6],
-    photo: homeAssets.souvenir,
-  },
-]);
 
 const goToShop = (item: CategoryType) => {
   overlayStore.startOverlay();
@@ -79,7 +44,7 @@ const goToShop = (item: CategoryType) => {
     <template #main>
       <div class="row justify-center q-gutter-sm">
         <q-intersection
-          v-for="(item, index) in state"
+          v-for="(item, index) in cards"
           :key="index"
           once
           transition="slide-up"

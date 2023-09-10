@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, watch } from 'vue';
 import { api } from 'src/api';
 import { IProductFromList } from 'src/types/responses';
 import { overwriteRouterPush } from 'src/utils/RouterProxy';
@@ -33,6 +33,17 @@ const getData = async () => {
   }
 };
 
+watch(
+  () => router.currentRoute.value.params.type,
+  (val, oldVal) => {
+    if (val !== oldVal) {
+      state.page = 1;
+      state.items = [];
+      firstStart();
+    }
+  }
+);
+
 const firstStart = async () => {
   overlayStore.startOverlay();
   await getData();
@@ -49,7 +60,11 @@ const putToCardClick = (item: IProductFromList) => {
 };
 
 const orderClick = (item: IProductFromList) => {
-  console.log('da');
+  console.log(item);
+};
+
+const removeItem = (item: IProductFromList) => {
+  cartStore.removeItem(item);
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -102,7 +117,11 @@ onMounted(() => firstStart());
               >
                 <q-icon name="shopping_cart" size="sm" />
               </div>
-              <div v-else class="main-item-main-buttons-small">
+              <div
+                @click="removeItem(item)"
+                v-else
+                class="main-item-main-buttons-small"
+              >
                 <q-icon name="done" size="sm" />
               </div>
             </div>

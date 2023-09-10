@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { IProductFromList } from 'src/types/responses';
 import { useCartStore } from 'src/stores/stores/cart';
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 
 const cartStore = useCartStore();
-defineProps<{
+const props = defineProps<{
   item: IProductFromList;
 }>();
 
@@ -12,15 +12,27 @@ const state = reactive({
   count: 1,
 });
 
-const addCounter = () => {
-  state.count++;
-};
+const updateCounter = (type: 'add' | 'remove') => {
+  // --- add --- //
+  if (type === 'add') {
+    state.count++;
+    cartStore.updateCounter(props.item, state.count);
 
-const removeCounter = () => {
-  if (state.count > 1) {
+    return;
+  }
+
+  // --- remove --- //
+  if (type === 'remove' && state.count > 1) {
     state.count--;
+    cartStore.updateCounter(props.item, state.count);
+
+    return;
   }
 };
+
+onMounted(() => {
+  state.count = cartStore.getItemCount(props.item._id);
+});
 </script>
 
 <template>
@@ -50,10 +62,14 @@ const removeCounter = () => {
           <q-icon
             name="remove"
             class="icon_button_style"
-            @click="removeCounter"
+            @click="updateCounter('remove')"
           />
           {{ state.count }}
-          <q-icon name="add" class="icon_button_style" @click="addCounter" />
+          <q-icon
+            name="add"
+            class="icon_button_style"
+            @click="updateCounter('add')"
+          />
         </div>
       </div>
     </div>
