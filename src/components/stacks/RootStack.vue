@@ -14,9 +14,12 @@ import instagram from 'src/assets/instagram.png';
 import mail from 'src/assets/mail.png';
 import { cards } from 'src/utils/cards';
 import { CategoryType } from 'src/utils/categories';
+import { useOrderStore } from 'src/stores/stores/order';
 
 const overlayStore = useOverlayStore();
 const cartStore = useCartStore();
+const orderStore = useOrderStore();
+
 const router = useRouter();
 
 const state = reactive({
@@ -24,7 +27,13 @@ const state = reactive({
   termsOfUseDialog: false,
   showTabs: false,
   selectedRouteTabValue: '',
+  showCart: false,
 });
+
+const orderClick = () => {
+  orderStore.startOrder(cartStore.getItems);
+  state.dialog = false;
+};
 
 const fixLink = () => {
   router.beforeEach((to, from, next) => {
@@ -39,6 +48,10 @@ const fixLink = () => {
 
 const checkTabs = (val?: string) => {
   const currentRoute = val ? val : router.currentRoute.value.name;
+
+  state.showCart = !router.currentRoute.value.matched.some(
+    (record) => record.name === RouterNames.APP_ORDER_VIEW
+  );
 
   state.showTabs = ((): boolean => {
     switch (currentRoute) {
@@ -117,7 +130,7 @@ onMounted(() => {
             </q-avatar>
           </div>
 
-          <div class="cart" @click="state.dialog = true">
+          <div v-if="state.showCart" class="cart" @click="state.dialog = true">
             <q-avatar>
               <q-icon name="shopping_cart" size="sm" />
             </q-avatar>
@@ -167,7 +180,12 @@ onMounted(() => {
       <q-separator />
 
       <q-card-actions class="dialog-actions">
-        <q-btn flat>{{ $t('orderNow') }}</q-btn>
+        <q-btn
+          flat
+          v-if="cartStore.getItems.length !== 0"
+          @click="orderClick"
+          >{{ $t('orderNow') }}</q-btn
+        >
       </q-card-actions>
     </q-card>
   </q-dialog>

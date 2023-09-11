@@ -5,24 +5,16 @@
   flex-direction: row;
   justify-content: center;
 
-  &-main {
-    border: 1px solid lightgray;
-    border-radius: 50px 50px 0 0;
-    height: calc(100vh - 50px);
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    &-left {
-      flex: 1;
-      height: 100%;
-    }
-
-    &-right {
-      height: 100%;
-      width: 300px;
-    }
+  &-left {
+    flex: 1;
+    height: 100%;
   }
+
+  &-right {
+    width: 30vw;
+    background-color: lightgray;
+  }
+}
+
+.orderInfo {
 }

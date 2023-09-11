@@ -7,9 +7,12 @@ import { RouterNames } from 'src/enums/router/RouterNames';
 import { useRouter } from 'vue-router';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 import { useCartStore } from 'src/stores/stores/cart';
+import { useOrderStore } from 'src/stores/stores/order';
 
 const cartStore = useCartStore();
 const overlayStore = useOverlayStore();
+const orderStore = useOrderStore();
+
 const router = useRouter();
 const state = reactive({
   page: 1,
@@ -60,7 +63,7 @@ const putToCardClick = (item: IProductFromList) => {
 };
 
 const orderClick = (item: IProductFromList) => {
-  console.log(item);
+  orderStore.buyItNow(item);
 };
 
 const removeItem = (item: IProductFromList) => {

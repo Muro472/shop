@@ -22,7 +22,11 @@ export const useCartStore = defineStore('cart', {
       const localItems = localStorage.getItem('cart');
       const localCounter = localStorage.getItem('counter');
 
+      console.log(localItems, localCounter);
+
       if (!localItems || !localCounter) return;
+
+      console.log('da');
 
       this.counterForItems = JSON.parse(localCounter) as CounterForItemsType;
       this.itemIds = JSON.parse(localItems) as string[];
