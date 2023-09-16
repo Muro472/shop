@@ -1,4 +1,4 @@
-import { categories, CategoryType } from 'src/utils/categories';
+import { categories } from 'src/utils/categories';
 import { homeAssets } from 'src/utils/categories';
 
 export const cards = [

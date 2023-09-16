@@ -1,9 +1,30 @@
+.shippingInfo {
+  margin: 3% 3% 0 10%;
+
+  &-bigText {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  &-inputHousing {
+    flex: 1;
+    margin: 10px;
+  }
+
+  &-nInputHousing {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .orderStack {
   width: 100%;
   background-color: $secondary;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-height: calc(100vh - 58px);
 
   &-left {
     flex: 1;
@@ -11,10 +32,49 @@
   }
 
   &-right {
-    width: 30vw;
-    background-color: lightgray;
+    width: 44vw;
+    background-color: #f5f5f5;
+    border: solid #e5e5e5 1px;
+
+    &-price {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+      // padding: 20px;
+    }
   }
 }
 
 .orderInfo {
+  &-list {
+    width: 80%;
+    overflow: hidden;
+    margin: 20px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+
+    &-separator {
+      height: 100%;
+      width: 1px;
+      background-color: #e5e5e5;
+    }
+
+    &-image {
+      height: 60px;
+      width: 60px;
+      margin-right: 5px;
+      border-radius: 10px;
+    }
+
+    &-price {
+      margin-left: 10px;
+    }
+
+    &-title {
+      flex: 1;
+      padding-left: 10px;
+    }
+  }
 }

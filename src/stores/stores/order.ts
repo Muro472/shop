@@ -83,9 +83,7 @@ export const useOrderStore = defineStore('order', {
 
       this.orderCreated = true;
 
-      routerInstance.push(
-        overwriteRouterPush(RouterNames.APP_ORDER_PERSONAL_DATA_VIEW)
-      );
+      routerInstance.push(overwriteRouterPush(RouterNames.APP_ORDER_VIEW));
     },
 
     async buyItNow(item: IProductFromList) {
@@ -100,9 +98,7 @@ export const useOrderStore = defineStore('order', {
 
       this.orderCreated = true;
 
-      routerInstance.push(
-        overwriteRouterPush(RouterNames.APP_ORDER_PERSONAL_DATA_VIEW)
-      );
+      routerInstance.push(overwriteRouterPush(RouterNames.APP_ORDER_VIEW));
     },
 
     async finishOrder() {

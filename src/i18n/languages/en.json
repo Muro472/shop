@@ -15,5 +15,20 @@
   "basket": "Kosár",
   "termsOfUseDialog": "Használati feltételek",
   "termsOfUseOne": "- Všetke ceny sú uvedené z DPH, bez poštovného poplatku.",
-  "termsOfUseTwo": "- Produkcia bude odoslaná najneskôr po 48 hodín od času objednávky"
+  "termsOfUseTwo": "- Produkcia bude odoslaná najneskôr po 48 hodín od času objednávky",
+  "contact": "Kapcsolat",
+  "total": "Összesen:",
+  "shippingAddress": "Szállítási cím",
+  "email": "Email",
+  "countryOrRegion": "Ország",
+  "firstName": "Keresztnév",
+  "lastName": "Vezetéknév",
+  "address": "Cím",
+  "apartment": "Lakás, lakás, stb. (nem kötelező)",
+  "city": "Város",
+  "ZIPCode": "Irányítószám",
+  "phoneNumber": "Telefonszám",
+  "cash": "Készpénz",
+  "card": "Kártya",
+  "payment": "Fizetés"
 }
