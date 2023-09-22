@@ -200,7 +200,7 @@ onMounted(() => {
 
           <div class="orderInfo-list-title">
             <div>
-              {{ textShortener(item.title + item.title, 110) }}
+              {{ textShortener(item.title, 110) }}
             </div>
           </div>
           <div class="orderInfo-list-price">
