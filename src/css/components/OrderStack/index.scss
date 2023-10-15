@@ -18,6 +18,14 @@
   }
 }
 
+.orderStackMobile {
+  background-color: $secondary;
+  width: 100%;
+  min-height: calc(100vh - 58px);
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .orderStack {
   width: 100%;
   background-color: $secondary;

@@ -152,7 +152,36 @@ onMounted(() => {
       </q-header>
 
       <q-page-container v-show="!overlayStore.getOverlay">
-        <router-view name="RootStack" />
+        <div>
+          <router-view name="RootStack" />
+          <div class="footer">
+            <div>
+              <span class="font-white">
+                Ⓒ Fun Music {{ new Date().getUTCFullYear() }}
+              </span>
+            </div>
+            <div class="footer__img-container">
+              <div class="footer__contact-us-section font-white">
+                Contant Us:
+                <img
+                  @click="goToEmail"
+                  class="footer-socials-icon-main"
+                  :src="mail"
+                />
+              </div>
+              <img
+                @click="goToFacebook"
+                class="footer-socials-icon-main"
+                :src="facebook"
+              />
+              <img
+                @click="goToInstagram"
+                class="footer-socials-icon-main"
+                :src="instagram"
+              />
+            </div>
+          </div>
+        </div>
       </q-page-container>
     </q-layout>
   </q-card>
@@ -189,30 +218,6 @@ onMounted(() => {
       </q-card-actions>
     </q-card>
   </q-dialog>
-
-  <div class="footer">
-    <div>
-      <span class="font-white">
-        Ⓒ Fun Music {{ new Date().getUTCFullYear() }}
-      </span>
-    </div>
-    <div class="footer__img-container">
-      <div class="footer__contact-us-section font-white">
-        Contant Us:
-        <img @click="goToEmail" class="footer-socials-icon-main" :src="mail" />
-      </div>
-      <img
-        @click="goToFacebook"
-        class="footer-socials-icon-main"
-        :src="facebook"
-      />
-      <img
-        @click="goToInstagram"
-        class="footer-socials-icon-main"
-        :src="instagram"
-      />
-    </div>
-  </div>
 
   <q-dialog v-model="state.termsOfUseDialog">
     <q-card>

@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import { onMounted, reactive, computed } from 'vue';
+import { onMounted, reactive, computed, ref } from 'vue';
 import { useOrderStore } from 'src/stores/stores/order';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 import { textShortener } from 'src/composition/TextShortener';
 import { shippingCountries } from 'src/utils/shippingCountries';
+import { useQuasar } from 'quasar';
+const $q = useQuasar();
 const overlayStore = useOverlayStore();
 const orderStore = useOrderStore();
 
-const getData = () => {
+const getData = async () => {
   if (orderStore.getOrderCreated) return;
 
   overlayStore.startOverlay();
-  orderStore.initOrderList();
+  await orderStore.initOrderList();
+  totalPrice.value = orderStore.getItems.reduce((acc, item) => {
+    return acc + item.price * orderStore.getItemCount(item._id);
+  }, 0);
   overlayStore.stopOverlay();
 };
 
-const totalPrice = orderStore.getItems.reduce((acc, item) => {
-  return acc + item.price * orderStore.getItemCount(item._id);
-}, 0);
+let totalPrice = ref(0);
 
 const orderInfo = reactive({
   email: '',
@@ -74,8 +77,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="orderStack">
-    <div class="orderStack-left shippingInfo">
+  <div
+    :class="$q.screen.sm || $q.screen.xs ? 'orderStackMobile' : 'orderStack'"
+  >
+    <div
+      :class="
+        'orderStack' + $q.screen.sm || $q.screen.xs
+          ? 'Mobile-left'
+          : '-left' + 'shippingInfo'
+      "
+    >
       <!-- Contact -->
       <div class="shippingInfo-bigText">
         {{ $t('contact') }}
@@ -191,7 +202,13 @@ onMounted(() => {
 
     <!-- right side -->
 
-    <div class="orderStack-right orderInfo">
+    <div
+      :class="
+        'orderStack' + $q.screen.sm || $q.screen.xs
+          ? 'Mobile-right'
+          : '-right' + 'orderInfo'
+      "
+    >
       <template v-for="(item, index) in orderStore.getItems" :key="index">
         <div class="orderInfo-list">
           <img class="orderInfo-list-image" :src="item.img" />

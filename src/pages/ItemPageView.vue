@@ -6,7 +6,9 @@ import { IProductFromList } from 'src/types/responses';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 import { useCartStore } from 'src/stores/stores/cart';
 import { useOrderStore } from 'src/stores/stores/order';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 const orderStore = useOrderStore();
 const cartStore = useCartStore();
 const overlayStore = useOverlayStore();
@@ -54,40 +56,86 @@ onMounted(getData);
 </script>
 
 <template>
-  <div class="main">
-    <div class="main-container" v-if="state.item">
-      <q-img :src="state.item.img" fit="cover" class="main-container-image" />
-      <div class="main-container-data">
-        <div class="text-h3">
-          {{ state.item.title }}
-        </div>
-        <div class="text-h4">
-          {{ state.item.brand }}
-        </div>
-        <div class="text-h6 littleMargin">
-          {{ state.item.desc }}
-        </div>
-        <div class="text-h5 littleMargin">{{ state.item.price }} €</div>
-        <div class="main-container-data-buttons littleMargin">
-          <div
-            class="main-container-data-buttons-big text-h6"
-            @click="buyInOneClick"
-          >
-            {{ $t('buyInOneClick') }}
-          </div>
-          <div class="main-container-data-buttons-small">
-            <q-icon
-              v-if="!state.itemIncluded"
-              name="shopping_cart"
-              size="md"
-              @click="addToCart"
-            />
-            <q-icon v-else @click="removeItem" name="done" size="md" />
+  <template v-if="state.item">
+    <template v-if="!$q.screen.xs">
+      <div class="main">
+        <div class="main-container">
+          <q-img
+            :src="state.item.img"
+            fit="cover"
+            class="main-container-image"
+          />
+          <div class="main-container-data">
+            <div class="main-container-data-title">
+              {{ state.item.title }} {{ $t('by') }} {{ state.item.brand }}
+            </div>
+            <div class="text-h6 littleMargin">
+              {{ state.item.desc }}
+            </div>
+            <div class="text-h5 littleMargin">{{ state.item.price }} €</div>
+            <div class="main-container-data-buttons littleMargin">
+              <div
+                class="main-container-data-buttons-big text-h6"
+                @click="buyInOneClick"
+              >
+                {{ $t('buyInOneClick') }}
+              </div>
+              <div class="main-container-data-buttons-small">
+                <q-icon
+                  v-if="!state.itemIncluded"
+                  name="shopping_cart"
+                  size="md"
+                  @click="addToCart"
+                />
+                <q-icon v-else @click="removeItem" name="done" size="md" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+
+    <!-- mobile -->
+
+    <template v-else>
+      <div class="mainMobile">
+        <div class="mainMobile-container">
+          <q-img
+            :src="state.item.img"
+            fit="cover"
+            class="mainMobile-container-image"
+          />
+          <div class="mainMobile-container-data">
+            <div class="mainMobile-container-data-title">
+              {{ state.item.title }} {{ $t('by') }} {{ state.item.brand }}
+            </div>
+            <div class="text-h5 mainMobile-container-data-price">
+              {{ state.item.price }} €
+            </div>
+            <div class="mainMobile-container-data-buttons">
+              <q-btn outline @click="buyInOneClick">
+                <div class="mainMobile-container-data-buttons-big text-h6">
+                  {{ $t('buyInOneClick') }}
+                </div>
+              </q-btn>
+              <div class="mainMobile-container-data-buttons-small">
+                <q-icon
+                  v-if="!state.itemIncluded"
+                  name="shopping_cart"
+                  size="md"
+                  @click="addToCart"
+                />
+                <q-icon v-else @click="removeItem" name="done" size="md" />
+              </div>
+            </div>
+            <div class="mainMobile-container-data-description">
+              {{ state.item.desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </template>
 </template>
 
 <style scoped lang="scss">

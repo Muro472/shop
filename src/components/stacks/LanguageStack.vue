@@ -24,5 +24,5 @@ watchEffect(() => {
     <MainLoaderComponent />
   </q-dialog>
 
-  <router-view style="height: 100%" name="LanguageStack" />
+  <router-view name="LanguageStack" />
 </template>

@@ -30,5 +30,6 @@
   "phoneNumber": "Telefonszám",
   "cash": "Készpénz",
   "card": "Kártya",
-  "payment": "Fizetés"
+  "payment": "Fizetés",
+  "by": "by"
 }

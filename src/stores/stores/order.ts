@@ -52,7 +52,7 @@ export const useOrderStore = defineStore('order', {
     },
 
     async initOrderList() {
-      // when order page is reloaded
+      // when order page is reloaded or entered
       const routerInstance = await router({ store: createPinia() });
 
       const localItemIds = localStorage.getItem('orderListIds');
@@ -63,6 +63,9 @@ export const useOrderStore = defineStore('order', {
       }
       this.itemIds = JSON.parse(localItemIds) as string[];
 
+      const localOrderCounter = localStorage.getItem('orderCounter');
+      if (localOrderCounter)
+        this.counter = JSON.parse(localOrderCounter) as CounterForItemsType;
       const response = (await api.getCartItems(this.itemIds))[1];
 
       if (response) this.items = response;
