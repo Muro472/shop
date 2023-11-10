@@ -2,7 +2,7 @@
 import { IProductFromList } from 'src/types/responses';
 import { useCartStore } from 'src/stores/stores/cart';
 import { reactive, onMounted } from 'vue';
-
+import { textShortener } from 'src/composition/TextShortener';
 const cartStore = useCartStore();
 const props = defineProps<{
   item: IProductFromList;
@@ -44,10 +44,10 @@ onMounted(() => {
     <div class="dialog-main-item-right">
       <div class="info">
         <div class="info-title">
-          {{ item.title }}
+          {{ textShortener(item.title, 26) }}
         </div>
         <div class="info-title">
-          {{ item.brand }}
+          {{ textShortener(item.brand, 26) }}
         </div>
         <div class="info-price">{{ item.price }} €</div>
       </div>
