@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, computed, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useOrderStore } from 'src/stores/stores/order';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 import { textShortener } from 'src/composition/TextShortener';
@@ -10,10 +10,16 @@ const overlayStore = useOverlayStore();
 const orderStore = useOrderStore();
 
 const getData = async () => {
-  if (orderStore.getOrderCreated) return;
+  if (orderStore.getOrderCreated) {
+    totalPrice.value = orderStore.getItems.reduce((acc, item) => {
+      return acc + item.price * orderStore.getItemCount(item._id);
+    }, 0);
+    return;
+  }
 
   overlayStore.startOverlay();
   await orderStore.initOrderList();
+
   totalPrice.value = orderStore.getItems.reduce((acc, item) => {
     return acc + item.price * orderStore.getItemCount(item._id);
   }, 0);
@@ -34,19 +40,19 @@ const orderInfo = reactive({
   phoneNumber: '',
 });
 
-const readyForPayment = computed((): boolean => {
-  if (orderInfo.email === '') return false;
-  if (orderInfo.countryRegion === '') return false;
-  if (orderInfo.firstName === '') return false;
-  if (orderInfo.lastName === '') return false;
-  if (orderInfo.address === '') return false;
-  if (orderInfo.city === '') return false;
-  if (orderInfo.city === '') return false;
-  if (orderInfo.zipCode === '') return false;
-  if (orderInfo.phoneNumber === '') return false;
+// const readyForPayment = computed((): boolean => {
+//   if (orderInfo.email === '') return false;
+//   if (orderInfo.countryRegion === '') return false;
+//   if (orderInfo.firstName === '') return false;
+//   if (orderInfo.lastName === '') return false;
+//   if (orderInfo.address === '') return false;
+//   if (orderInfo.city === '') return false;
+//   if (orderInfo.city === '') return false;
+//   if (orderInfo.zipCode === '') return false;
+//   if (orderInfo.phoneNumber === '') return false;
 
-  return true;
-});
+//   return true;
+// });
 
 const paymentInfo = reactive({
   cash: false,
@@ -165,39 +171,37 @@ onMounted(() => {
 
       <!-- Payment -->
 
-      <template v-if="readyForPayment">
-        <div class="shippingInfo-bigText">
-          {{ $t('payment') }}
-        </div>
+      <div class="shippingInfo-bigText">
+        {{ $t('payment') }}
+      </div>
 
-        <div class="q-gutter-sm">
-          <q-checkbox
-            v-model="paymentInfo.card"
-            :label="$t('cash')"
-            color="green"
-            @update:model-value="(val) => paymentInfoUpdate(val, 'card')"
-          />
-
-          <q-checkbox
-            v-model="paymentInfo.cash"
-            :label="$t('card')"
-            color="green"
-            @update:model-value="(val) => paymentInfoUpdate(val, 'cash')"
-          />
-        </div>
-
-        <q-btn
-          v-if="paymentInfo.card"
-          @click="orderWithCash"
-          :label="'button with card'"
+      <div class="q-gutter-sm">
+        <q-checkbox
+          v-model="paymentInfo.card"
+          :label="$t('cash')"
+          color="green"
+          @update:model-value="(val) => paymentInfoUpdate(val, 'card')"
         />
 
-        <q-btn
-          v-if="paymentInfo.cash"
-          @click="orderWithCard"
-          :label="'button with cash'"
+        <q-checkbox
+          v-model="paymentInfo.cash"
+          :label="$t('card')"
+          color="green"
+          @update:model-value="(val) => paymentInfoUpdate(val, 'cash')"
         />
-      </template>
+      </div>
+
+      <q-btn
+        disabled="paymentInfo.card"
+        @click="orderWithCash"
+        :label="'button with card'"
+      />
+
+      <q-btn
+        disabled="paymentInfo.cash"
+        @click="orderWithCard"
+        :label="'button with cash'"
+      />
     </div>
 
     <!-- right side -->

@@ -50,7 +50,7 @@ const removeItem = () => {
 };
 
 const buyInOneClick = () => {
-  if (state.item) orderStore.startOrder([state.item]);
+  if (state.item) orderStore.buyItNow(state.item);
 };
 
 onMounted(getData);

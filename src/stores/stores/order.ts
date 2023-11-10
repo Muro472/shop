@@ -64,13 +64,16 @@ export const useOrderStore = defineStore('order', {
       this.itemIds = JSON.parse(localItemIds) as string[];
 
       const localOrderCounter = localStorage.getItem('orderCounter');
+      console.log(localOrderCounter);
+
       if (localOrderCounter)
         this.counter = JSON.parse(localOrderCounter) as CounterForItemsType;
+
       const response = (await api.getCartItems(this.itemIds))[1];
 
-      if (response) this.items = response;
-
-      routerInstance.push(overwriteRouterPush(RouterNames.APP_ORDER_VIEW));
+      if (response) {
+        this.items = response;
+      }
     },
 
     async startOrder(items: IProductFromList[]) {
@@ -98,6 +101,7 @@ export const useOrderStore = defineStore('order', {
 
       localStorage.setItem('orderListIds', JSON.stringify(this.itemIds));
       localStorage.setItem('orderCounter', JSON.stringify({ [item._id]: 1 }));
+      this.counter = { [item._id]: 1 };
 
       this.orderCreated = true;
 

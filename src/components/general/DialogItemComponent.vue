@@ -17,7 +17,6 @@ const updateCounter = (type: 'add' | 'remove') => {
   if (type === 'add') {
     state.count++;
     cartStore.updateCounter(props.item, state.count);
-
     return;
   }
 
