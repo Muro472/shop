@@ -14,4 +14,6 @@ export enum RouterPaths {
   APP_ORDER_INFORMATION_VIEW = 'order-information',
 
   APP_ORDER_PAYMENT_INFORMATION_VIEW = 'payment-information',
+
+  APP_ITEM_DEMO_VIEW = 'admin/demo',
 }

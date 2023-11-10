@@ -16,6 +16,8 @@ export enum RouterNames {
   APP_ORDER_INFORMATION_VIEW = 'APP_ORDER_INFORMATION_VIEW',
 
   APP_ORDER_PAYMENT_INFORMATION_VIEW = 'APP_ORDER_PAYMENT_INFORMATION_VIEW',
+
+  APP_ITEM_DEMO_VIEW = 'APP_ITEM_DEMO_VIEW',
 }
 
 export interface RouterParams {
@@ -27,4 +29,5 @@ export interface RouterParams {
   [RouterNames.APP_ORDER_PERSONAL_DATA_VIEW]: never;
   [RouterNames.APP_ORDER_INFORMATION_VIEW]: never;
   [RouterNames.APP_ORDER_PAYMENT_INFORMATION_VIEW]: never;
+  [RouterNames.APP_ITEM_DEMO_VIEW]: never;
 }

@@ -40,6 +40,13 @@ const routes: RouteRecordRaw[] = [
           LanguageStack: () => import('src/pages/OrderView.vue'),
         },
       },
+      {
+        path: RouterPaths.APP_ITEM_DEMO_VIEW,
+        name: RouterNames.APP_ITEM_DEMO_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/ItemDemoPage.vue'),
+        },
+      },
     ],
   },
 ];
