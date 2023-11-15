@@ -1,17 +1,17 @@
 {
   "title": "FunMusic",
   "homePageText1": "In Music Veritas",
-  "buyInOneClick": "Buy in one click",
-  "orderNow": "Order now",
+  "buyInOneClick": "Kúpiť jedným kliknutím",
+  "orderNow": "Objednať teraz",
   "audiotechnic": "Audiotechnic",
-  "player": "Player",
-  "books": "Books",
-  "cassette": "Cassette",
+  "player": "Prehrávač",
+  "books": "Knihy",
+  "cassette": "Cazeta",
   "cd": "CD",
-  "tableGames": "Table games",
-  "posters": "Posters",
-  "souvenirs": "Souvenirs",
-  "vinyl": "Vinyl",
+  "tableGames": "Hry na stole",
+  "posters": "Plagáty",
+  "souvenirs": "Pamiatky",
+  "vinyl": "Vínil",
   "basket": "Kosár",
   "termsOfUseDialog": "Használati feltételek",
   "termsOfUseOne": "- Všetke ceny sú uvedené z DPH, bez poštovného poplatku.",
@@ -31,5 +31,5 @@
   "cash": "Készpénz",
   "card": "Kártya",
   "payment": "Fizetés",
-  "by": "by"
+  "by": "od"
 }

@@ -64,7 +64,6 @@ export const useOrderStore = defineStore('order', {
       this.itemIds = JSON.parse(localItemIds) as string[];
 
       const localOrderCounter = localStorage.getItem('orderCounter');
-      console.log(localOrderCounter);
 
       if (localOrderCounter)
         this.counter = JSON.parse(localOrderCounter) as CounterForItemsType;
