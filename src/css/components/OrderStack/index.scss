@@ -1,3 +1,5 @@
+@import '../../quasar.variables.scss';
+
 .shippingInfo {
   margin: 3% 3% 0 10%;
 
@@ -15,6 +17,29 @@
   &-nInputHousing {
     display: flex;
     justify-content: space-between;
+  }
+
+  &-actions {
+    margin: 10px;
+    margin-bottom: 20px;
+
+    &-list {
+      width: 100%;
+      border: #c2c2c2 solid 1px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+
+      &-item {
+        color: #727172;
+        &-active {
+          background-color: #e5e5e5;
+        }
+      }
+    }
+
+    &-button {
+      width: 100%;
+    }
   }
 }
 

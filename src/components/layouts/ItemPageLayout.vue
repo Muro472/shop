@@ -42,15 +42,12 @@ const buyInOneClick = () => {
           <div class="main-container-data-title">
             {{ title }} {{ $t('by') }} {{ brand }}
           </div>
-          <div class="text-h6 littleMargin">
+          <div class="littleMargin">
             {{ desc }}
           </div>
-          <div class="text-h5 littleMargin">{{ price }} €</div>
+          <div class="littleMargin">{{ price }} €</div>
           <div class="main-container-data-buttons littleMargin">
-            <div
-              class="main-container-data-buttons-big text-h6"
-              @click="buyInOneClick"
-            >
+            <div class="main-container-data-buttons-big" @click="buyInOneClick">
               {{ $t('buyInOneClick') }}
             </div>
             <div class="main-container-data-buttons-small">
@@ -78,12 +75,10 @@ const buyInOneClick = () => {
           <div class="mainMobile-container-data-title">
             {{ title }} {{ $t('by') }} {{ brand }}
           </div>
-          <div class="text-h5 mainMobile-container-data-price">
-            {{ price }} €
-          </div>
+          <div class="mainMobile-container-data-price">{{ price }} €</div>
           <div class="mainMobile-container-data-buttons">
             <q-btn outline @click="buyInOneClick">
-              <div class="mainMobile-container-data-buttons-big text-h6">
+              <div class="mainMobile-container-data-buttons-big">
                 {{ $t('buyInOneClick') }}
               </div>
             </q-btn>

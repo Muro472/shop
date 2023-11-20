@@ -28,6 +28,8 @@ const getData = async () => {
 
 let totalPrice = ref(0);
 
+let activePaymentType = ref('');
+
 const orderInfo = reactive({
   email: '',
   countryRegion: '',
@@ -175,33 +177,44 @@ onMounted(() => {
         {{ $t('payment') }}
       </div>
 
-      <div class="q-gutter-sm">
-        <q-checkbox
-          v-model="paymentInfo.card"
-          :label="$t('cash')"
-          color="green"
-          @update:model-value="(val) => paymentInfoUpdate(val, 'card')"
-        />
+      <div class="shippingInfo-actions">
+        <q-list class="shippingInfo-actions-list">
+          <q-item
+            class="shippingInfo-actions-list-item"
+            @click="activePaymentType = 'cash'"
+            :active="activePaymentType === 'cash'"
+            clickable
+            v-ripple
+            active-class="shippingInfo-actions-list-item-active"
+          >
+            {{ $t('buyWithCash') }}
+          </q-item>
+          <q-separator class="separator" />
 
-        <q-checkbox
-          v-model="paymentInfo.cash"
-          :label="$t('card')"
-          color="green"
-          @update:model-value="(val) => paymentInfoUpdate(val, 'cash')"
+          <q-item
+            class="shippingInfo-actions-list-item"
+            @click="activePaymentType = 'card'"
+            :active="activePaymentType === 'card'"
+            clickable
+            v-ripple
+            active-class="shippingInfo-actions-list-item-active"
+          >
+            {{ $t('buyWithCard') }}
+          </q-item>
+        </q-list>
+
+        <q-btn
+          color="purple"
+          :label="$t('buy')"
+          class="shippingInfo-actions-button"
         />
+        <!-- <div class="shippingInfo-actions-button" @click="orderWithCash">
+          {{ $t('buyWithCash') }}
+        </div>
+        <div class="shippingInfo-actions-button" @click="orderWithCard">
+          {{ $t('buyWithCard') }}
+        </div> -->
       </div>
-
-      <q-btn
-        disabled="paymentInfo.card"
-        @click="orderWithCash"
-        :label="'button with card'"
-      />
-
-      <q-btn
-        disabled="paymentInfo.cash"
-        @click="orderWithCard"
-        :label="'button with cash'"
-      />
     </div>
 
     <!-- right side -->

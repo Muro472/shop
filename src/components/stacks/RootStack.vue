@@ -39,7 +39,7 @@ const fixLink = () => {
   router.beforeEach((to, from, next) => {
     // making shure that link has a lang param
     if (!to.name) {
-      next({ name: RouterNames.APP_HOME_VIEW, params: { lang: 'en' } });
+      next({ name: RouterNames.APP_HOME_VIEW, params: { lang: 'slk' } });
     } else {
       next();
     }
