@@ -23,11 +23,19 @@
     margin: 10px;
     margin-bottom: 20px;
 
+    &-error {
+      color: red;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      min-height: 24px;
+    }
+
     &-list {
       width: 100%;
       border: #c2c2c2 solid 1px;
       border-radius: 5px;
-      margin-bottom: 20px;
 
       &-item {
         color: #727172;

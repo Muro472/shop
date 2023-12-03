@@ -5,6 +5,9 @@ import { useOverlayStore } from 'src/stores/stores/overlay';
 import { textShortener } from 'src/composition/TextShortener';
 import { shippingCountries } from 'src/utils/shippingCountries';
 import { useQuasar } from 'quasar';
+import { api } from 'src/api';
+import { IProductsToOrder } from 'src/types/requests';
+
 const $q = useQuasar();
 const overlayStore = useOverlayStore();
 const orderStore = useOrderStore();
@@ -27,6 +30,7 @@ const getData = async () => {
 };
 
 let totalPrice = ref(0);
+let buttonClicked = ref(false);
 
 let activePaymentType = ref('');
 
@@ -42,41 +46,68 @@ const orderInfo = reactive({
   phoneNumber: '',
 });
 
-// const readyForPayment = computed((): boolean => {
-//   if (orderInfo.email === '') return false;
-//   if (orderInfo.countryRegion === '') return false;
-//   if (orderInfo.firstName === '') return false;
-//   if (orderInfo.lastName === '') return false;
-//   if (orderInfo.address === '') return false;
-//   if (orderInfo.city === '') return false;
-//   if (orderInfo.city === '') return false;
-//   if (orderInfo.zipCode === '') return false;
-//   if (orderInfo.phoneNumber === '') return false;
+const getProductsToOrder = () => {
+  const productsToOrder: IProductsToOrder[] = [];
 
-//   return true;
-// });
+  orderStore.getItems.forEach((item) => {
+    productsToOrder.push({
+      productId: item._id,
+      quantity: orderStore.getItemCount(item._id),
+    });
+  });
 
-const paymentInfo = reactive({
-  cash: false,
-  card: false,
-});
-
-const paymentInfoUpdate = (val: boolean, type: 'cash' | 'card') => {
-  if (type === 'cash') {
-    paymentInfo.card = false;
-    paymentInfo.cash = true;
-  } else if (type === 'card') {
-    paymentInfo.card = true;
-    paymentInfo.cash = false;
-  }
+  return productsToOrder;
 };
 
-const orderWithCash = () => {
-  console.log('orderWithCash');
+const orderWithCash = async () => {
+  await api.createOrder({
+    name: orderInfo.firstName,
+    surname: orderInfo.lastName,
+    email: orderInfo.email,
+
+    phone: orderInfo.phoneNumber,
+    products: getProductsToOrder(),
+    amount: totalPrice.value,
+    address: orderInfo.address,
+    apartment: orderInfo.apartment,
+    country: orderInfo.countryRegion,
+    city: orderInfo.city,
+    postalCode: orderInfo.zipCode,
+    status: 'Ordered with cash',
+  });
+};
+
+const validate = () => {
+  if (
+    orderInfo.email === '' ||
+    orderInfo.countryRegion === '' ||
+    orderInfo.firstName === '' ||
+    orderInfo.lastName === '' ||
+    orderInfo.address === '' ||
+    orderInfo.apartment === '' ||
+    orderInfo.city === '' ||
+    orderInfo.zipCode === '' ||
+    orderInfo.phoneNumber === '' ||
+    activePaymentType.value === ''
+  )
+    return false;
+
+  return true;
 };
 
 const orderWithCard = () => {
   console.log('orderWithCard');
+};
+
+const handleBuy = () => {
+  buttonClicked.value = true;
+  if (!validate()) return;
+
+  if (activePaymentType.value === 'cash') {
+    orderWithCash();
+  } else if (activePaymentType.value === 'card') {
+    orderWithCard();
+  }
 };
 
 onMounted(() => {
@@ -101,7 +132,13 @@ onMounted(() => {
       </div>
 
       <div class="shippingInfo-inputHousing">
-        <q-input v-model="orderInfo.email" outlined :label="$t('email')" />
+        <q-input
+          v-model="orderInfo.email"
+          outlined
+          :label="$t('email')"
+          :error="orderInfo.email === '' && buttonClicked"
+          :error-message="$t('requiredField')"
+        />
       </div>
 
       <!-- Shipping Address -->
@@ -116,6 +153,8 @@ onMounted(() => {
           :options="shippingCountries"
           outlined
           :label="$t('countryOrRegion')"
+          :error="orderInfo.countryRegion === '' && buttonClicked"
+          :error-message="$t('requiredField')"
         />
       </div>
 
@@ -125,6 +164,8 @@ onMounted(() => {
             v-model="orderInfo.firstName"
             outlined
             :label="$t('firstName')"
+            :error="orderInfo.firstName === '' && buttonClicked"
+            :error-message="$t('requiredField')"
           />
         </div>
 
@@ -133,12 +174,20 @@ onMounted(() => {
             v-model="orderInfo.lastName"
             outlined
             :label="$t('lastName')"
+            :error="orderInfo.lastName === '' && buttonClicked"
+            :error-message="$t('requiredField')"
           />
         </div>
       </div>
 
       <div class="shippingInfo-inputHousing">
-        <q-input v-model="orderInfo.address" outlined :label="$t('address')" />
+        <q-input
+          v-model="orderInfo.address"
+          outlined
+          :label="$t('address')"
+          :error="orderInfo.address === '' && buttonClicked"
+          :error-message="$t('requiredField')"
+        />
       </div>
 
       <div class="shippingInfo-inputHousing">
@@ -146,12 +195,20 @@ onMounted(() => {
           v-model="orderInfo.apartment"
           outlined
           :label="$t('apartment')"
+          :error="orderInfo.apartment === '' && buttonClicked"
+          :error-message="$t('requiredField')"
         />
       </div>
 
       <div class="shippingInfo-nInputHousing">
         <div class="shippingInfo-inputHousing">
-          <q-input v-model="orderInfo.city" outlined :label="$t('city')" />
+          <q-input
+            v-model="orderInfo.city"
+            outlined
+            :label="$t('city')"
+            :error="orderInfo.city === '' && buttonClicked"
+            :error-message="$t('requiredField')"
+          />
         </div>
 
         <div class="shippingInfo-inputHousing">
@@ -159,6 +216,8 @@ onMounted(() => {
             v-model="orderInfo.zipCode"
             outlined
             :label="$t('ZIPCode')"
+            :error="orderInfo.zipCode === '' && buttonClicked"
+            :error-message="$t('requiredField')"
           />
         </div>
       </div>
@@ -168,6 +227,7 @@ onMounted(() => {
           v-model="orderInfo.phoneNumber"
           outlined
           :label="$t('phoneNumber')"
+          :error="orderInfo.phoneNumber === '' && buttonClicked"
         />
       </div>
 
@@ -203,17 +263,20 @@ onMounted(() => {
           </q-item>
         </q-list>
 
+        <div class="shippingInfo-actions-error">
+          {{
+            buttonClicked && activePaymentType === ''
+              ? $t('choosePaymentMethod')
+              : ''
+          }}
+        </div>
+
         <q-btn
           color="purple"
           :label="$t('buy')"
           class="shippingInfo-actions-button"
+          @click="handleBuy"
         />
-        <!-- <div class="shippingInfo-actions-button" @click="orderWithCash">
-          {{ $t('buyWithCash') }}
-        </div>
-        <div class="shippingInfo-actions-button" @click="orderWithCard">
-          {{ $t('buyWithCard') }}
-        </div> -->
       </div>
     </div>
 

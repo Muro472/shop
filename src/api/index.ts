@@ -1,6 +1,9 @@
 import { AppApiService } from 'src/api/AppApiService';
 
-import { GetProductsRequestType } from 'src/types/requests';
+import {
+  GetProductsRequestType,
+  CreateOrderRequestType,
+} from 'src/types/requests';
 import {
   GetProductsResponseType,
   IProductFromList,
@@ -31,6 +34,16 @@ class ApiService extends AppApiService {
     return this.axiosCall<GetCartItems>({
       method: 'get',
       url: `/products/cart/${ids.join(',')}`,
+    });
+  }
+
+  async createOrder(
+    payload: CreateOrderRequestType
+  ): Promise<[null, unknown] | [unknown]> {
+    return this.axiosCall<unknown>({
+      method: 'post',
+      url: '/orders',
+      data: payload,
     });
   }
 }

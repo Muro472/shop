@@ -34,5 +34,7 @@
   "by": "od",
   "buyWithCash": "Vásároljon készpénzzel",
   "buyWithCard": "Vásároljon kártyával",
-  "buy": "Vásároljon"
+  "buy": "Vásároljon",
+  "requiredField": "Kötelező mező",
+  "choosePaymentMethod": "Válassza ki a fizetési módot"
 }
