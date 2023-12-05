@@ -7,6 +7,22 @@ import { shippingCountries } from 'src/utils/shippingCountries';
 import { useQuasar } from 'quasar';
 import { api } from 'src/api';
 import { IProductsToOrder } from 'src/types/requests';
+import VubEcard from 'vub-ecard';
+
+const orderWithCard = () => {
+  // const vub = new VubEcard('10056701', 'E7056701', {
+  //   test: true,
+  //   currency: 978,
+  //   transactionType: 'Auth',
+  //   language: 'sk',
+  //   storeType: '3d_pay_hosting',
+  // });
+  // vub.setOrder('ORD123456' /* ORDER ID */, 10.99 /* ORDER PRICE */);
+  // vub.setCallbackSuccessUrl('http://yourpage.domain/ok');
+  // vub.setCallbackErrorUrl('http://yourpage.domain/fail');
+  // vub.generateForm([], {}, { value: 'proceed to payment' });
+  // vub.getGatewayUrl();
+};
 
 const $q = useQuasar();
 const overlayStore = useOverlayStore();
@@ -32,7 +48,7 @@ const getData = async () => {
 let totalPrice = ref(0);
 let buttonClicked = ref(false);
 
-let activePaymentType = ref('');
+let activePaymentType = ref('cash');
 
 const orderInfo = reactive({
   email: '',
@@ -93,10 +109,6 @@ const validate = () => {
     return false;
 
   return true;
-};
-
-const orderWithCard = () => {
-  console.log('orderWithCard');
 };
 
 const handleBuy = () => {
@@ -256,10 +268,12 @@ onMounted(() => {
             @click="activePaymentType = 'card'"
             :active="activePaymentType === 'card'"
             clickable
+            :disable="true"
             v-ripple
             active-class="shippingInfo-actions-list-item-active"
           >
             {{ $t('buyWithCard') }}
+            <small>(Coming soon)</small>
           </q-item>
         </q-list>
 
