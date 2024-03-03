@@ -36,5 +36,10 @@
   "buyWithCard": "Vásároljon kártyával",
   "buy": "Vásároljon",
   "requiredField": "Kötelező mező",
-  "choosePaymentMethod": "Válassza ki a fizetési módot"
+  "choosePaymentMethod": "Válassza ki a fizetési módot",
+  "success": "Sikeres",
+  "thankYouForYourOrder": "Köszönjük a rendelését!",
+  "goBack": "Menj vissza",
+  "paymentFailed": "Sikertelen fizetés",
+  "contactUs": "Kapcsolat"
 }

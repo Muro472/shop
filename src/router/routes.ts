@@ -47,6 +47,29 @@ const routes: RouteRecordRaw[] = [
           LanguageStack: () => import('src/pages/ItemDemoPage.vue'),
         },
       },
+
+      //order
+      {
+        path: RouterPaths.APP_ORDER_SUCCESS_VIEW,
+        name: RouterNames.APP_ORDER_SUCCESS_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/OrderSuccessPage.vue'),
+        },
+      },
+      {
+        path: RouterPaths.APP_ORDER_SIMPLE_SUCCESS_VIEW,
+        name: RouterNames.APP_ORDER_SIMPLE_SUCCESS_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/OrderSuccessPage.vue'),
+        },
+      },
+      {
+        path: RouterPaths.APP_ORDER_ERROR_VIEW,
+        name: RouterNames.APP_ORDER_ERROR_VIEW,
+        components: {
+          LanguageStack: () => import('src/pages/OrderErrorPage.vue'),
+        },
+      },
     ],
   },
 ];

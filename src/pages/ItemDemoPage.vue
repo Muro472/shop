@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import ItemPageLayout from 'src/components/layouts/ItemPageLayout.vue';
 import { useOverlayStore } from 'src/stores/stores/overlay';
 

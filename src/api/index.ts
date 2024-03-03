@@ -30,10 +30,27 @@ class ApiService extends AppApiService {
     });
   }
 
+  async orderSuccess(id: string): Promise<[null, unknown] | [unknown]> {
+    return this.axiosCall<unknown>({
+      method: 'post',
+      url: `/orders/${id}/success`,
+    });
+  }
+
   async getCartItems(ids: string[]): Promise<[null, GetCartItems] | [unknown]> {
     return this.axiosCall<GetCartItems>({
       method: 'get',
       url: `/products/cart/${ids.join(',')}`,
+    });
+  }
+
+  async createWithCard(
+    payload: string
+  ): Promise<[null, HTMLElement] | [unknown]> {
+    return this.axiosCall<HTMLElement>({
+      method: 'post',
+      url: `/orders/${payload}/pay`,
+      data: payload,
     });
   }
 

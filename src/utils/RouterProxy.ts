@@ -1,6 +1,5 @@
-import { useRouter, RouteLocationRaw } from 'vue-router';
+import { RouteLocationRaw } from 'vue-router';
 import { RouterParams } from 'src/enums/router/RouterNames';
-const router = useRouter();
 
 export const overwriteRouterPush = <T extends keyof RouterParams>(
   name: T,

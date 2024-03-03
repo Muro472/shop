@@ -13,7 +13,11 @@ export enum RouterPaths {
 
   APP_ORDER_INFORMATION_VIEW = 'order-information',
 
-  APP_ORDER_PAYMENT_INFORMATION_VIEW = 'payment-information',
-
   APP_ITEM_DEMO_VIEW = 'admin/demo',
+
+  APP_ORDER_SUCCESS_VIEW = 'order-success/:id',
+
+  APP_ORDER_ERROR_VIEW = 'order-fail',
+
+  APP_ORDER_SIMPLE_SUCCESS_VIEW = 'order-success',
 }

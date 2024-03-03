@@ -7,21 +7,37 @@ import { shippingCountries } from 'src/utils/shippingCountries';
 import { useQuasar } from 'quasar';
 import { api } from 'src/api';
 import { IProductsToOrder } from 'src/types/requests';
-import VubEcard from 'vub-ecard';
+import { RouterNames } from 'src/enums/router/RouterNames';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
-const orderWithCard = () => {
-  // const vub = new VubEcard('10056701', 'E7056701', {
-  //   test: true,
-  //   currency: 978,
-  //   transactionType: 'Auth',
-  //   language: 'sk',
-  //   storeType: '3d_pay_hosting',
-  // });
-  // vub.setOrder('ORD123456' /* ORDER ID */, 10.99 /* ORDER PRICE */);
-  // vub.setCallbackSuccessUrl('http://yourpage.domain/ok');
-  // vub.setCallbackErrorUrl('http://yourpage.domain/fail');
-  // vub.generateForm([], {}, { value: 'proceed to payment' });
-  // vub.getGatewayUrl();
+const overlayContent = ref<HTMLElement>();
+
+const orderWithCard = async () => {
+  const response1 = (
+    await api.createOrder({
+      name: orderInfo.firstName,
+      surname: orderInfo.lastName,
+      email: orderInfo.email,
+      phone: orderInfo.phoneNumber,
+      products: getProductsToOrder(),
+      amount: totalPrice.value,
+      address: orderInfo.address,
+      apartment: orderInfo.apartment,
+      country: orderInfo.countryRegion,
+      city: orderInfo.city,
+      postalCode: orderInfo.zipCode,
+      status: 'Ordered with cash',
+    })
+  )[1];
+
+  const response = (await api.createWithCard(response1._id))[1];
+
+  if (response) {
+    overlayContent.value = response;
+
+    overlayState.overlay = true;
+  }
 };
 
 const $q = useQuasar();
@@ -47,6 +63,10 @@ const getData = async () => {
 
 let totalPrice = ref(0);
 let buttonClicked = ref(false);
+
+const overlayState = reactive({
+  overlay: false,
+});
 
 let activePaymentType = ref('cash');
 
@@ -80,7 +100,6 @@ const orderWithCash = async () => {
     name: orderInfo.firstName,
     surname: orderInfo.lastName,
     email: orderInfo.email,
-
     phone: orderInfo.phoneNumber,
     products: getProductsToOrder(),
     amount: totalPrice.value,
@@ -90,6 +109,10 @@ const orderWithCash = async () => {
     city: orderInfo.city,
     postalCode: orderInfo.zipCode,
     status: 'Ordered with cash',
+  });
+
+  router.push({
+    name: RouterNames.APP_ORDER_SIMPLE_SUCCESS_VIEW,
   });
 };
 
@@ -268,12 +291,10 @@ onMounted(() => {
             @click="activePaymentType = 'card'"
             :active="activePaymentType === 'card'"
             clickable
-            :disable="true"
             v-ripple
             active-class="shippingInfo-actions-list-item-active"
           >
             {{ $t('buyWithCard') }}
-            <small>(Coming soon)</small>
           </q-item>
         </q-list>
 
@@ -326,6 +347,14 @@ onMounted(() => {
       </div>
     </div>
   </div>
+
+  <q-dialog v-model="overlayState.overlay" persistent>
+    <q-card>
+      <div style="margin: 20px">
+        <div v-html="overlayContent"></div>
+      </div>
+    </q-card>
+  </q-dialog>
 </template>
 
 <style scoped lang="scss">
